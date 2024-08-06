@@ -1,23 +1,56 @@
-function updateClock() {
-    const now = new Date();
-    const hours =String(now.getHours()).padStart(2,'0');
-    const minutes = String(now.getMinutes()).padStart(2,'0');
-    const seconds = String(now.getSeconds()).padStart(2,'0');
-    const timeString = `${hours}:${minutes}:${seconds}`;
-    document.getElementById('time').textContent = timeString;
+let currentNumber = "";
+let previousNumber = "";
+let operator = "";
 
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Friday','Saturday'];
-    const months =['January','Febuary','March','April','May','June','July','August','September','October','November','December',];
-
-
-    const dayName = days[now.getDay()];
-    const monthName = months[now.getMonth()];
-    const day = String(now.getDate()).padStart(2,'0');
-    const year = now.getFullYear();
-
-    const DateString = `${dayName} ,${day} ${monthName}, ${year}`;
-    document.getElementById('date').textContent = DateString;
-    
+function appendNumber(number) {
+  currentNumber += number;
+  document.getElementById("display").value = currentNumber;
 }
-setInterval(updateClock,1000);
-updateClock();
+
+function clearDisplay() {
+  currentNumber = "";
+  previousNumber = "";
+  operator = "";
+  document.getElementById("display").value = "";
+}
+
+function appendOperator(op) {
+  if (currentNumber === "") {
+    return; 
+  }
+  previousNumber = currentNumber;
+  currentNumber = "";
+  operator = op;
+}
+
+function calculate() {
+  if (currentNumber === "" || operator === "") {
+    return; 
+  }
+  let result = 0;
+  const num1 = parseFloat(previousNumber);
+  const num2 = parseFloat(currentNumber);
+  switch (operator) {
+    case "+":
+      result = num1 + num2;
+      break;
+    case "-":
+      result = num1 - num2;
+      break;
+    case "*":
+      result = num1 * num2;
+      break;
+    case "/":
+      if (num2 === 0) {
+        alert("Division by zero!");
+        return;
+      } else {
+        result = num1 / num2;
+      }
+      break;
+  }
+  currentNumber = result.toString();
+  previousNumber = "";
+  operator = "";
+  document.getElementById("display").value = currentNumber;
+}
