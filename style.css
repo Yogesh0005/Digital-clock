@@ -1,0 +1,31 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* width: 100vh; */
+    height: 100vh;
+    background-color:#282c34;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff;
+}
+.clock-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(1, 1, 1);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(247, 247, 249, 0.5);
+}
+.clock{
+    text-align: center;
+    
+}
+#time{
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+#date{
+    font-size: 1.5rem;
+}
